@@ -1,0 +1,100 @@
+{
+  "words": [
+    {
+      "name": "culpable",
+      "means": "deserving blame or censure as being wrong or injurious",
+      "difficulty" : 2,
+	  "star": 0
+    },
+    {
+      "name": "loathsome",
+      "means": "highly offensive; arousing aversion or disgust",
+      "difficulty" : 1,
+	  "star": 0
+    },
+	{
+      "name": "snicker",
+      "means": "laugh quietly",
+      "difficulty" : 0,
+	  "star": 0
+    },
+	{
+      "name": "wistful",
+      "means": "showing pensive sadness",
+      "difficulty" : 1,
+	  "star": 0
+    },
+	{
+      "name": "recrimination",
+      "means": "mutual accusations",
+      "difficulty" : 2,
+	  "star": 0
+    },
+	{
+      "name": "gaunt",
+      "means": "very thin especially from disease or hunger or cold",
+      "difficulty" : 0,
+	  "star": 0
+    },
+	{
+      "name": "subdued",
+      "means": "quieted and brought under control",
+      "difficulty" : 1,
+	  "star": 0
+    },
+	{
+      "name": "hijab",
+      "means": "a headscarf worn by Muslim women",
+      "difficulty" : 2,
+	  "star": 0
+    },
+	{
+      "name": "coup",
+      "means": "a sudden and decisive change of government by force",
+      "difficulty" : 0,
+	  "star": 0
+    },
+	{
+      "name": "malfunction",
+      "means": "fail to work properly",
+      "difficulty" : 0,
+	  "star": 0
+    },
+	{
+      "name": "freeware",
+      "means": "software that is provided without charge",
+      "difficulty" : 0,
+	  "star": 0
+    },
+	{
+      "name": "shareware",
+      "means": "software that is available free of charge; may be distributed for evaluation with a fee requested for additional features or a manual etc",
+      "difficulty" : 0,
+	  "star": 0
+    },
+	{
+      "name": "upgrade",
+      "means": "software that provides better performance than an earlier version did",
+      "difficulty" : 1,
+	  "star": 0
+    },
+	{
+      "name": "bitcoin",
+      "means": "a system of open source peer-to-peer software for the creation and exchange of (payment in) a certain type of cryptocurrency; the first such system to be fully functional",
+      "difficulty" : 1,
+	  "star": 0
+    },
+	{
+      "name": "bite",
+      "means": "To cut, grip, or tear with or as if with the teeth",
+      "difficulty" : 0,
+	  "star": 0
+    },
+	{
+      "name": "offspring",
+      "means": "A child or children of a parent or parents",
+      "difficulty" : 1,
+	  "star": 0
+    }
+  ]
+}
