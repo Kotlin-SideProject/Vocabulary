@@ -1,9 +1,9 @@
 package com.litto.vocabulary.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteOpenHelper
+
 @Database(entities = [Word::class], version = 1, exportSchema = false)
 abstract class WordDatabase : RoomDatabase() {
     abstract fun wordDao(): WordDao
@@ -13,6 +13,8 @@ abstract class WordDatabase : RoomDatabase() {
             if (instance == null) {
                 instance = Room.databaseBuilder(context,
                     WordDatabase::class.java, "word.db")
+                    .allowMainThreadQueries()
+                    .addCallback()
                     .build()
             }
             return instance
