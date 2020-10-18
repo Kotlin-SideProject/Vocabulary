@@ -6,6 +6,9 @@ import androidx.room.Room
 import com.litto.vocabulary.R
 import com.litto.vocabulary.data.Word
 import com.litto.vocabulary.data.WordDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
@@ -19,9 +22,7 @@ class MainActivity : AppCompatActivity() {
         val list = mutableListOf<Word>()
         val words = obj.getJSONArray("words")
         //
-        val database = Room.databaseBuilder(this,
-                    WordDatabase::class.java, "word.db")
-                    .build()
+
         for (i in 0 until words.length()) {
             val word = words.getJSONObject(i).run {
                 val name = getString("name")
@@ -31,11 +32,13 @@ class MainActivity : AppCompatActivity() {
                 Word( name, means, difficulty, star)
             }
             list.add(word)
+
+
             // insert data sqlite
-            Thread {
+            /*Thread {
                 database.wordDao().insert(word)
                 database.wordDao().getAll()
-            }.start()
+            }.start()*/
 
         }
 
