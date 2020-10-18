@@ -2,6 +2,9 @@ package com.litto.vocabulary.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.litto.vocabulary.R
 import com.litto.vocabulary.data.Word
@@ -12,9 +15,21 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewModel: WordListViewModel
+    companion object {
+        val TAG = MainActivity::class.java.simpleName
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel = ViewModelProvider(this,
+            WordListViewModelFactory(applicationContext))
+                .get(WordListViewModel::class.java)
+        viewModel.getWords().observe(this, Observer {words ->
+            //
+            Log.d(TAG, "words count: ${words.size}");
+        })
+
         //read Json File
         val inputStream = resources.openRawResource(R.raw.vocabulary)
         val data = inputStream.bufferedReader().readText()
