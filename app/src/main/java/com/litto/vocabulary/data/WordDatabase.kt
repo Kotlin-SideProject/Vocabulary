@@ -14,7 +14,7 @@ abstract class WordDatabase : RoomDatabase() {
                 instance = Room.databaseBuilder(context,
                     WordDatabase::class.java, "word.db")
                     .allowMainThreadQueries()
-                    .addCallback()
+                    .addCallback(WordCallBack(context))
                     .build()
             }
             return instance

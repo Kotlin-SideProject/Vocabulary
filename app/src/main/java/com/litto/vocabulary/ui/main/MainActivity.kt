@@ -35,38 +35,9 @@ class MainActivity : AppCompatActivity() {
             WordListViewModelFactory(applicationContext))
                 .get(WordListViewModel::class.java)
         viewModel.getWords().observe(this, Observer {words ->
-            //
             Log.d(TAG, "words count: ${words.size}")
             adapter.submitList(words)
             recycler_view.invalidate()
         })
-
-        //read Json File
-        val inputStream = resources.openRawResource(R.raw.vocabulary)
-        val data = inputStream.bufferedReader().readText()
-        val obj = JSONObject(data)
-        val list = mutableListOf<Word>()
-        val words = obj.getJSONArray("words")
-        //
-
-        for (i in 0 until words.length()) {
-            val word = words.getJSONObject(i).run {
-                val name = getString("name")
-                val means = getString("means")
-                val difficulty = getInt("difficulty")
-                val star = getInt("star")
-                Word( name, means, difficulty, star)
-            }
-            list.add(word)
-
-
-            // insert data sqlite
-            /*Thread {
-                database.wordDao().insert(word)
-                database.wordDao().getAll()
-            }.start()*/
-
-        }
-
     }
 }
