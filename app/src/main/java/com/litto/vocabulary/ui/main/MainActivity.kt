@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ import com.litto.vocabulary.R
 import com.litto.vocabulary.data.Word
 import com.litto.vocabulary.data.WordDatabase
 import com.litto.vocabulary.ui.detail.DetailActivity
+import com.litto.vocabulary.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,5 +54,22 @@ class MainActivity : AppCompatActivity(), WordClickListener {
             startActivity(it)
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.action_settings -> {
+                Intent(this, SettingsActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
