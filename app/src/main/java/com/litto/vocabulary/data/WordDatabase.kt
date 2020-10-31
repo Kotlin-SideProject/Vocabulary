@@ -6,10 +6,12 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper
 
 @Database(entities = [Word::class], version = 1, exportSchema = false)
 abstract class WordDatabase : RoomDatabase() {
+
     abstract fun wordDao(): WordDao
+
     companion object {
         var instance: WordDatabase? = null
-        fun getIntance(context: Context) : WordDatabase? {
+        fun getIntance(context: Context) : WordDatabase {
             if (instance == null) {
                 instance = Room.databaseBuilder(context,
                     WordDatabase::class.java, "word.db")
@@ -17,7 +19,7 @@ abstract class WordDatabase : RoomDatabase() {
                     .addCallback(WordCallBack(context))
                     .build()
             }
-            return instance
+            return instance!!
         }
     }
 

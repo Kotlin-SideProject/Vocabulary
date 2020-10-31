@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), WordClickListener {
         recycler_view.adapter = adapter
 
         viewModel = ViewModelProvider(this,
-            WordListViewModelFactory(applicationContext))
+            WordListViewModelFactory.createFactory(this))
                 .get(WordListViewModel::class.java)
         viewModel.getWords().observe(this, Observer {words ->
             Log.d(TAG, "words count: ${words.size}")

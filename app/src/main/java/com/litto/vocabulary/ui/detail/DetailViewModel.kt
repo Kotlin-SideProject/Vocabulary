@@ -8,12 +8,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DetailViewModel(val repository: Repository) : ViewModel() {
-    val word = MutableLiveData<Word>()
-    fun setName(name : String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val w = repository.getWordByName(name)
-            word.postValue(w)
-        }
-    }
+class DetailViewModel(
+        private val repository: Repository,
+        private val name: String
+) : ViewModel() {
+
+    val word = repository.getWordByName(name)
 }
