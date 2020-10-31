@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.litto.vocabulary.R
@@ -26,11 +27,14 @@ class MainActivity : AppCompatActivity(), WordClickListener {
     private lateinit var viewModel: WordListViewModel
     companion object {
         val TAG = MainActivity::class.java.simpleName
+        val REQUEST_SETTING = 77
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        //
+        val sortBy = PreferenceManager.getDefaultSharedPreferences(this)
+            .getString("sort", "default")!!
         recycler_view.setHasFixedSize(true)
         recycler_view.layoutManager = LinearLayoutManager(this)
         adapter = WordAdapter()
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity(), WordClickListener {
         recycler_view.adapter = adapter
 
         viewModel = ViewModelProvider(this,
-            WordListViewModelFactory.createFactory(this))
+            WordListViewModelFactory.createFactory(this, sortBy))
                 .get(WordListViewModel::class.java)
         viewModel.getWords().observe(this, Observer {words ->
             Log.d(TAG, "words count: ${words.size}")
@@ -56,6 +60,14 @@ class MainActivity : AppCompatActivity(), WordClickListener {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_SETTING) {
+            viewModel.updateSort(PreferenceManager.getDefaultSharedPreferences(this)
+                .getString("sort", "default")!!)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -65,7 +77,7 @@ class MainActivity : AppCompatActivity(), WordClickListener {
         when(item.itemId) {
             R.id.action_settings -> {
                 Intent(this, SettingsActivity::class.java).apply {
-                    startActivity(this)
+                    startActivityForResult(this, REQUEST_SETTING)
                 }
             }
         }

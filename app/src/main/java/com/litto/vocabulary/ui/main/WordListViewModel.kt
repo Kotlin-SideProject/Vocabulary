@@ -1,20 +1,23 @@
 package com.litto.vocabulary.ui.main
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.litto.vocabulary.data.Repository
 import com.litto.vocabulary.data.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WordListViewModel(val repository: Repository) : ViewModel() {
+class WordListViewModel(
+    val repository: Repository,
+    var sortBy: String
+) : ViewModel() {
     private val words = MutableLiveData<List<Word>>()
-    fun getWords() : MutableLiveData<List<Word>> {
-        CoroutineScope(Dispatchers.IO).launch {
-            words.postValue(repository.getAll())
-        }
-        return words
+    fun getWords() : LiveData<List<Word>> {
+        return repository.getAll(sortBy)
+    }
+
+    fun updateSort(string: String) {
+        sortBy = string
+        //TODO: livedata update problem
     }
 }
